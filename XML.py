@@ -27,36 +27,38 @@ def indexTree (root):
 	indexedTreeHelper = [] 		# ['XML', 'THU', 'Team' ...]
 	for child in root.iter():
 		indexedTreeHelper.append(child.tag)
-
 	return indexedTreeHelper
-
-
-'''	
-	for i in tree:
-		print "child: " + str(i)
-		for j in i:
-			print "grandchild: " + str(j)
-			for k in j:
-				print "2gc: " + str(k)
-'''
-	#tree2 = ET.fromstringlist(tree)
-
-
-	#print tree2
 
 
 root = XML_read('RunXML.in', sys.stdout)
 #print ElementTree.dump()
 
+i=0
+for child in root.iter():
+	#print "here!"
+	child.set('position', str(i))
+	i=i+1
+
+ET.dump(root)
+
+
 indexedTree = indexTree(root)
 #print indexedTree
 
+print root.get("position")
+
 searchPattern = indexTree(root[1])
+
+
+print indexedTree
 print searchPattern 
 
 treeroot = root[0].tag   # THU
 patternParent = searchPattern[0]
 patternChild = searchPattern[1]
+
+
+
 #for country in root.findall('country'):
 
 
