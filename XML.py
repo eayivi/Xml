@@ -2,6 +2,7 @@
 #
 #
 
+
 import xml.etree.ElementTree as ET
 import sys
 
@@ -17,22 +18,17 @@ def XML_read(r, w):
 		xml += line
 		#print "LINE = " + line
 
-	xml = "<XML>" + xml + "</XML>"
-
-	#print xml
-
-	root = ET.fromstring(xml)
-
-	#print root.findall("THU")
+	xml = "<XML>" + xml + "</XML>" 
 	
-	print root[0].findall("Team1")
-	
-	l = root.findall("Team3")
+	return ET.fromstring(xml)
 
 
+def indexTree (root):
+	indexedTreeHelper = [] 		# ['XML', 'THU', 'Team' ...]
+	for child in root.iter():
+		indexedTreeHelper.append(child.tag)
 
-
-
+	return indexedTreeHelper
 
 
 '''	
@@ -48,4 +44,20 @@ def XML_read(r, w):
 
 	#print tree2
 
-XML_read('RunXML.in', sys.stdout)
+
+root = XML_read('RunXML.in', sys.stdout)
+#print ElementTree.dump()
+
+indexedTree = indexTree(root)
+#print indexedTree
+
+searchPattern = indexTree(root[1])
+print searchPattern 
+
+treeroot = root[0].tag   # THU
+patternParent = searchPattern[0]
+patternChild = searchPattern[1]
+#for country in root.findall('country'):
+
+
+#print list(root)
