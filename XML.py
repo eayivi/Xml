@@ -29,6 +29,20 @@ def indexTree (root):
 		indexedTreeHelper.append(child.tag)
 	return indexedTreeHelper
 
+def findPattern(parent, pattern, patternIndex) :
+	if parent.tag == pattern[patternIndex] :
+		patternIndex += 1
+		if patternIndex == len(pattern) :
+			return answerList
+	else :
+		patternIndex = 0
+	for c in parent :
+		print c.tag
+		findPattern(c, pattern, patternIndex)
+
+
+
+
 
 root = XML_read('RunXML.in', sys.stdout)
 #print ElementTree.dump()
@@ -56,6 +70,9 @@ print searchPattern
 treeroot = root[0].tag   # THU
 patternParent = searchPattern[0]
 patternChild = searchPattern[1]
+
+findPattern (root[0], searchPattern, 0)
+
 
 
 
