@@ -1,15 +1,15 @@
 <THU>
-	<Team>
+	<Team1>
 		<ACRush></ACRush>
 		<Jelly></Jelly>
-		<Cooly></Cooly>
-	</Team>
+		<Cooly1></Cooly1>
+	</Team1>
 	<JiaJia>
-		<Team>
+		<Team2>
 			<Ahyangyi></Ahyangyi>
 			<Dragon></Dragon>
-			<Cooly><Amber></Amber></Cooly>
-		</Team>
+			<Cooly2><Amber></Amber></Cooly2>
+		</Team2>
 	</JiaJia>
 </THU>
-<Team><Cooly></Cooly></Team>
+<Team3><Cooly3></Cooly3></Team3>

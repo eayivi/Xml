@@ -14,10 +14,10 @@ To document the program
 
 import sys
 
-from XML import XML_solve
+from XML import XML_read
 
 # ----
 # main
 # ----
 
-XML_solve(sys.stdin, sys.stdout)
+XML_read(sys.stdin, sys.stdout)

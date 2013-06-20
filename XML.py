@@ -3,32 +3,49 @@
 #
 
 import xml.etree.ElementTree as ET
+import sys
 
-freader = open('RunXML.in', 'r')
-fwriter = open('RunXML.in2', 'w')
-freader2 = open('RunXML.in2', 'r')
 
-line = freader.readline()
-xml = line
+def XML_read(r, w):
+	freader = open('RunXML.in', 'r')
 
-while line != "":
 	line = freader.readline()
-	xml += line
-	print "LINE = " + line
+	xml = line
 
-xml = "<XML>" + xml + "</XML>"
+	while line != "":
+		line = freader.readline()
+		xml += line
+		#print "LINE = " + line
 
-print xml
+	xml = "<XML>" + xml + "</XML>"
 
-tree = ET.fromstring(xml)
+	#print xml
+
+	root = ET.fromstring(xml)
+
+	#print root.findall("THU")
+	
+	print root[0].findall("Team1")
+	
+	l = root.findall("Team3")
 
 
-root = tree.getroot()
 
 
-children = list(root)
-children1 = list(children[0])
 
-print children
-print children1
 
+
+'''	
+	for i in tree:
+		print "child: " + str(i)
+		for j in i:
+			print "grandchild: " + str(j)
+			for k in j:
+				print "2gc: " + str(k)
+'''
+	#tree2 = ET.fromstringlist(tree)
+
+
+	#print tree2
+
+XML_read('RunXML.in', sys.stdout)
