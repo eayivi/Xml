@@ -8,13 +8,12 @@ import sys
 
 
 def xml_read(r, w):
-	freader = open('RunXML.in', 'r')
 
-	line = freader.readline()
+	line = r.readline()
 	xml = line
 
 	while line != "":
-		line = freader.readline()
+		line = r.readline()
 		xml += line
 
 	xml = "<XML>" + xml + "</XML>" 
@@ -46,7 +45,7 @@ def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, tree
 			return patternLocations
 
 def xml_solve(r, w):
-	root = xml_read('RunXML.in', sys.stdout)
+	root = xml_read(sys.stdin, sys.stdout)
 
 	i=0
 	for child in root.iter():
