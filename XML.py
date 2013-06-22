@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 import sys
 
 
-def XML_read(r, w):
+def xml_read(r, w):
 	freader = open('RunXML.in', 'r')
 
 	line = freader.readline()
@@ -16,12 +16,10 @@ def XML_read(r, w):
 	while line != "":
 		line = freader.readline()
 		xml += line
-		#print "LINE = " + line
 
 	xml = "<XML>" + xml + "</XML>" 
 	
 	return ET.fromstring(xml)
-
 
 def indexTree (root):
 	indexedTreeHelper = [] 		# ['XML', 'THU', 'Team' ...]
@@ -47,41 +45,34 @@ def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, tree
 		if type(ret) is list:
 			return patternLocations
 
+def xml_solve(r, w):
+	root = xml_read('RunXML.in', sys.stdout)
+
+	i=0
+	for child in root.iter():
+		child.set('position', str(i))
+		i=i+1
+
+	#ET.dump(root)
+
+
+	indexedTree = indexTree(root[0])
+
+	treeSize = 0
+	for i in root[0].iter():
+		treeSize += 1
+	
+	searchPattern = indexTree(root[1])
 
 
 
-root = XML_read('RunXML.in', sys.stdout)
-#print ElementTree.dump()
+	treeroot = root[0].tag   # THU
+	patternParent = searchPattern[0]
+	patternChild = searchPattern[1]
 
-i=0
-for child in root.iter():
-	child.set('position', str(i))
-	i=i+1
+	l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
 
-ET.dump(root)
+	print l
 
+xml_solve(sys.stdin, sys.stdout)
 
-indexedTree = indexTree(root[0])
-#print indexedTree
-
-treeSize = 0
-for i in root[0].iter():
-	treeSize += 1
-
-searchPattern = indexTree(root[1])
-
-
-
-treeroot = root[0].tag   # THU
-patternParent = searchPattern[0]
-patternChild = searchPattern[1]
-
-l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
-
-print l
-
-
-#for country in root.findall('country'):
-
-
-#print list(root)
