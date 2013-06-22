@@ -73,5 +73,3 @@ def xml_solve(r, w):
 
 	print l
 
-xml_solve(sys.stdin, sys.stdout)
-
