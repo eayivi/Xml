@@ -29,22 +29,23 @@ def indexTree (root):
 		indexedTreeHelper.append(child.tag)
 	return indexedTreeHelper
 
-def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations) :#parent is root of tree
+def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, treeSize) :#parent is root of tree
 	if parent.tag == pattern[patternIndex] :		#patternIndex is how deep we are in the pattern sought
 		if patternIndex == 0:
 			treeIndex = parent.get('position')
 		patternIndex += 1
 		if patternIndex == len(pattern) :			# found all elements from search pattern
 			patternLocations.append(treeIndex)							# list of locations of pattern
-			print patternLocations
 			patternIndex = 0
-
 	else :
 		patternIndex = 0
-	for c in parent :
-#		print c.tag
-		findPattern(c, pattern, patternIndex, treeIndex, patternLocations)
+	if int(parent.get('position')) == treeSize:
+		return patternLocations
 
+	for c in parent :
+		ret = findPattern(c, pattern, patternIndex, treeIndex, patternLocations, treeSize)
+		if type(ret) is list:
+			return patternLocations
 
 
 
@@ -54,31 +55,30 @@ root = XML_read('RunXML.in', sys.stdout)
 
 i=0
 for child in root.iter():
-	#print "here!"
 	child.set('position', str(i))
 	i=i+1
 
 ET.dump(root)
 
 
-indexedTree = indexTree(root)
+indexedTree = indexTree(root[0])
 #print indexedTree
 
-#print root.get("position")
+treeSize = 0
+for i in root[0].iter():
+	treeSize += 1
 
 searchPattern = indexTree(root[1])
 
 
-print indexedTree
-print searchPattern
 
 treeroot = root[0].tag   # THU
 patternParent = searchPattern[0]
 patternChild = searchPattern[1]
 
-findPattern (root[0], searchPattern, 0, 0, [])
+l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
 
-
+print l
 
 
 #for country in root.findall('country'):
