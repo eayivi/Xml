@@ -29,16 +29,21 @@ def indexTree (root):
 		indexedTreeHelper.append(child.tag)
 	return indexedTreeHelper
 
-def findPattern(parent, pattern, patternIndex) :
-	if parent.tag == pattern[patternIndex] :
+def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations) :#parent is root of tree
+	if parent.tag == pattern[patternIndex] :		#patternIndex is how deep we are in the pattern sought
+		if patternIndex == 0:
+			treeIndex = parent.get('position')
 		patternIndex += 1
-		if patternIndex == len(pattern) :
-			return answerList
+		if patternIndex == len(pattern) :			# found all elements from search pattern
+			patternLocations.append(treeIndex)							# list of locations of pattern
+			print patternLocations
+			patternIndex = 0
+
 	else :
 		patternIndex = 0
 	for c in parent :
-		print c.tag
-		findPattern(c, pattern, patternIndex)
+#		print c.tag
+		findPattern(c, pattern, patternIndex, treeIndex, patternLocations)
 
 
 
@@ -59,19 +64,19 @@ ET.dump(root)
 indexedTree = indexTree(root)
 #print indexedTree
 
-print root.get("position")
+#print root.get("position")
 
 searchPattern = indexTree(root[1])
 
 
 print indexedTree
-print searchPattern 
+print searchPattern
 
 treeroot = root[0].tag   # THU
 patternParent = searchPattern[0]
 patternChild = searchPattern[1]
 
-findPattern (root[0], searchPattern, 0)
+findPattern (root[0], searchPattern, 0, 0, [])
 
 
 
