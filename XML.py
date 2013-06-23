@@ -15,7 +15,8 @@ def xml_read(r, w):
 	while line != "":
 		line = r.readline()
 		xml += line
-
+	
+	#print xml[-1]
 	xml = "<XML>" + xml + "</XML>" 
 	
 	return ET.fromstring(xml)
@@ -66,8 +67,6 @@ def xml_solve(r, w):
 
 
 	treeroot = root[0].tag   # THU
-	patternParent = searchPattern[0]
-	patternChild = searchPattern[1]
 
 	l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
 
