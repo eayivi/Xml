@@ -16,7 +16,6 @@ def xml_read(r, w):
 		line = r.readline()
 		xml += line
 	
-	#print xml[-1]
 	xml = "<XML>" + xml + "</XML>" 
 	
 	return ET.fromstring(xml)
@@ -47,14 +46,11 @@ def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, tree
 
 def xml_solve(r, w):
 	root = xml_read(sys.stdin, sys.stdout)
-
+	
 	i=0
 	for child in root.iter():
 		child.set('position', str(i))
 		i=i+1
-
-	#ET.dump(root)
-
 
 	indexedTree = indexTree(root[0])
 
@@ -63,8 +59,6 @@ def xml_solve(r, w):
 		treeSize += 1
 	
 	searchPattern = indexTree(root[1])
-
-
 
 	treeroot = root[0].tag   # THU
 
