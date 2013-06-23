@@ -75,6 +75,7 @@ class TestXML (unittest.TestCase) :
 		l = indexTree(ET.fromstring("<a><b><c><d></d><e></e></c></b></a>"))
 		self.assert_(len(l) == 5)
 		self.assert_(l == ['a', 'b', 'c', 'd', 'e'])
+
 	# -----------
 	# findPattern
 	# -----------
@@ -94,7 +95,7 @@ class TestXML (unittest.TestCase) :
 		l = findPattern(root[0], pat, 0, 0, [], treeSize)
 		self.assert_(l == ['1'])
 
-	def test_findPattern_1 (self) :
+	def test_findPattern_2 (self) :
 		r = StringIO.StringIO("<a></a>\n<b></b>")
 		w = StringIO.StringIO()
 		root = xml_read(r, w)
@@ -109,7 +110,7 @@ class TestXML (unittest.TestCase) :
 		l = findPattern(root[0], pat, 0, 0, [], treeSize)
 		self.assert_(l == [])
 
-	def test_findPattern_1 (self) :
+	def test_findPattern_3 (self) :
 		r = StringIO.StringIO("<a><b><a></a></b></a>\n<a></a>")
 		w = StringIO.StringIO()
 		root = xml_read(r, w)
