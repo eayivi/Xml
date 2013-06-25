@@ -28,6 +28,7 @@ def indexTree (root):
 	for child in root.iter():
 		indexedTreeHelper.append(child.tag)
 	return indexedTreeHelper
+
 '''
 def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, treeSize) :#parent is root of tree
 	if parent.tag == pattern[patternIndex] :		#patternIndex is how deep we are in the pattern sought
@@ -56,6 +57,24 @@ def validatePattern(s, t) :#parent is root of tree
 	if execution completes, pattern match is validated
 	'''
 	print 'validatePattern'
+	matches = 0
+
+	print s,
+	print t
+
+	for sc in s:
+		for tc in t:
+			print sc,
+			print tc
+			if sc == tc:
+				matches += 1
+	#if matches != len(s.findall('*')):
+		#return False
+	#print matches,
+	#print len(s.findall('*'))
+	#print s.findall('*')
+
+
 
 def xml_solve(r, w):
 	root = xml_read(sys.stdin, sys.stdout)
@@ -83,24 +102,25 @@ def xml_solve(r, w):
 		if c.tag == root[1].tag:
 			potentialMatches.append(c.get('position'))
 
-	print potentialMatches
+	#print potentialMatches
 
 	# validate potential matches
 
 	matchIndex = 0
 
-	for e in root.iter():
+
+
+	for e in root[0].iter():
 		b = True
 		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
-			print e.get('position'),
-			print matchIndex
-			b = validatePattern(e, treeroot)
+			b = validatePattern(root[1], e)
 			matchIndex += 1
 		if b == False:
 			potentialMatches.remove(potentialMatches[matchIndex])
+			matchIndex -= 1
 		
 
-	print potentialMatches
+	#print potentialMatches
 
 
 
