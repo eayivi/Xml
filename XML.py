@@ -59,20 +59,17 @@ def validatePattern(s, t) :#parent is root of tree
 	print 'validatePattern'
 	matches = 0
 
-	print s,
-	print t
+	#print s,
+	#print t
 
 	for sc in s:
 		for tc in t:
-			print sc,
-			print tc
-			if sc == tc:
+			if sc.tag == tc.tag:
 				matches += 1
-	#if matches != len(s.findall('*')):
-		#return False
-	#print matches,
-	#print len(s.findall('*'))
-	#print s.findall('*')
+	if matches != len(s.findall('*')):
+		return False
+
+
 
 
 
@@ -102,25 +99,33 @@ def xml_solve(r, w):
 		if c.tag == root[1].tag:
 			potentialMatches.append(c.get('position'))
 
-	#print potentialMatches
+	print potentialMatches
 
 	# validate potential matches
 
 	matchIndex = 0
 
 
-
 	for e in root[0].iter():
 		b = True
 		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
 			b = validatePattern(root[1], e)
-			matchIndex += 1
-		if b == False:
-			potentialMatches.remove(potentialMatches[matchIndex])
-			matchIndex -= 1
+			if b != False:
+				matchIndex += 1
+			else:
+				potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
+
+		'''if b == False:
+			#potentialMatches.remove(potentialMatches[matchIndex])
+
+			print matchIndex,
+			print potentialMatches[:matchIndex]
+			potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
+			print potentialMatches
+'''
 		
 
-	#print potentialMatches
+	print potentialMatches
 
 
 
