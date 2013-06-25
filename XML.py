@@ -28,7 +28,7 @@ def indexTree (root):
 	for child in root.iter():
 		indexedTreeHelper.append(child.tag)
 	return indexedTreeHelper
-
+'''
 def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, treeSize) :#parent is root of tree
 	if parent.tag == pattern[patternIndex] :		#patternIndex is how deep we are in the pattern sought
 		if patternIndex == 0:
@@ -46,33 +46,65 @@ def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, tree
 		ret = findPattern(c, pattern, patternIndex, treeIndex, patternLocations, treeSize)
 		if type(ret) is list:
 			return patternLocations
+'''
 
-def findTreePattern(parent):
-	print parent.findall("./Team/")
-	print parent.find('./Team/')
+def validatePattern(s, t) :#parent is root of tree
+	'''
+	sp is an element in the search pattern
+	t is an element in the search tree
+	return False is pattern doesn't match
+	if execution completes, pattern match is validated
+	'''
+	print 'validatePattern'
 
 def xml_solve(r, w):
 	root = xml_read(sys.stdin, sys.stdout)
 	
 	i=0
 	for child in root.iter():
-		child.set('position', str(i))
+		child.set('position', str(i))	# add 'position' attribute to tree elements
 		i=i+1
 
-	indexedTree = indexTree(root[0])
+	indexedTree = indexTree(root[0])	# search tree as list
 
-	treeSize = 0
+	treeSize = 0					# number of element in search tree
 	for i in root[0].iter():
 		treeSize += 1
 	
-	searchPattern = indexTree(root[1])
+	searchPattern = indexTree(root[1])	# search pattern as list
 
 	treeroot = root[0].tag   # THU
 
-	l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
-
-	print l
-
-	findTreePattern(root[0])
 	
-	print root[0].findall('Team')[0]
+
+	# find locations of search pattern root in search tree
+	potentialMatches = []
+	for c in root[0].iter():
+		if c.tag == root[1].tag:
+			potentialMatches.append(c.get('position'))
+
+	print potentialMatches
+
+	# validate potential matches
+
+	matchIndex = 0
+
+	for e in root.iter():
+		b = True
+		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
+			print e.get('position'),
+			print matchIndex
+			b = validatePattern(e, treeroot)
+			matchIndex += 1
+		if b == False:
+			potentialMatches.remove(potentialMatches[matchIndex])
+		
+
+	print potentialMatches
+
+
+
+	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)	# 
+
+	#print l
+
