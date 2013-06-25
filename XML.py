@@ -1,5 +1,8 @@
 #
-#
+# Enam Ayivi
+# aea787
+# Paul Carroll
+# pvc95
 #
 
 
@@ -44,6 +47,10 @@ def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, tree
 		if type(ret) is list:
 			return patternLocations
 
+def findTreePattern(parent):
+	print parent.findall("./Team/")
+	print parent.find('./Team/')
+
 def xml_solve(r, w):
 	root = xml_read(sys.stdin, sys.stdout)
 	
@@ -66,3 +73,6 @@ def xml_solve(r, w):
 
 	print l
 
+	findTreePattern(root[0])
+	
+	print root[0].findall('Team')[0]

@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+#
+# Enam Ayivi
+# aea787
+# Paul Carroll
+# pvc95
+#
+
 
 """
 To test the program:

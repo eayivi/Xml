@@ -1,3 +1,10 @@
+#
+# Enam Ayivi
+# aea787
+# Paul Carroll
+# pvc95
+#
+
 """
 To run the program
     % python RunXML.py < RunXML.in > RunXML.out
