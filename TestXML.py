@@ -116,13 +116,13 @@ class TestXML (unittest.TestCase) :
 		print r
 		xml_solve(r, w)
 		print w.getvalue()
-		self.assert_(w.getvalue() == "1\n2")
+		self.assert_(w.getvalue() == "1\n2\n")
 
 	def test_solve_2 (self) :
 		r = StringIO.StringIO("<a></a>\n<a></a>")
 		w = StringIO.StringIO()
 		xml_solve(r, w)
-		self.assert_(w.getvalue() == "1\n1")
+		self.assert_(w.getvalue() == "1\n1\n")
 
 	def test_solve_3 (self) :
 		r = StringIO.StringIO("<d><a><b></b><c></c></a></d>\n<e></e>")

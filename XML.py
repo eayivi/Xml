@@ -11,22 +11,26 @@ import sys
 
 
 def xml_read(r, w):
-
 	line = r.readline()
 	xml = line
-
+	assert type(line) == str
+	assert type(line) == type(xml)
 	while line != "":
 		line = r.readline()
 		xml += line
+
+	assert line == ""
 	
 	xml = "<XML>" + xml + "</XML>" 
-	
+	assert len(xml) > 10
+	assert type(xml) == str
 	return ET.fromstring(xml)
 
 def indexTree (root):
 	indexedTreeHelper = [] 		# ['XML', 'THU', 'Team' ...]
 	for child in root.iter():
 		indexedTreeHelper.append(child.tag)
+	assert type(indexedTreeHelper) == list
 	return indexedTreeHelper
 
 '''
@@ -61,11 +65,12 @@ def validatePattern(s, t) :#parent is root of tree
 	# check for children of search pattern element in children of search tree element
 	for sc in s:			# sc is a child of the search pattern element
 		for tc in t:		# tc is a child of the search tree element
+			assert type(sc) == type(tc)
 			if sc.tag == tc.tag:
 				matches += 1
 	if matches != len(s.findall('*')):
 		return False
-
+	assert matches == len(s.findall('*'))
 	# recurse deeper into tree if match found
 	b = True
 	for sc in s:
@@ -74,13 +79,13 @@ def validatePattern(s, t) :#parent is root of tree
 				b = validatePattern(sc, tc)
 				if b == False:
 					return False
-
+	assert b != False
 	
 
 
 
 def xml_solve(r, w):
-	root = xml_read(sys.stdin, sys.stdout)
+	root = xml_read(r, w)
 	
 	i=0
 	for child in root.iter():
@@ -119,8 +124,6 @@ def xml_solve(r, w):
 				matchIndex += 1
 			else:
 				potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
-
-
 
 	#print 'VALIDATED MATCHES: ' + str(potentialMatches)
 
