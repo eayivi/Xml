@@ -97,9 +97,7 @@ class TestXML (unittest.TestCase) :
 	def test_validatePattern_2 (self):
 		tree1 = ET.fromstring("<a><b></b><c></c></a>")
 		tree2 = ET.fromstring("<a><b><c></c></b></a>")
-		b = True
 		b = validatePattern(tree1, tree2)
-		print "b = " + str(b)
 		self.assert_(b == False)
 
 	def test_validatePattern_3 (self):
@@ -115,45 +113,24 @@ class TestXML (unittest.TestCase) :
 	def test_solve_1 (self) :
 		r = StringIO.StringIO("<d><a><b></b><c></c></a></d>\n<a><b></b><c></c></a>")
 		w = StringIO.StringIO()
+		print r
 		xml_solve(r, w)
-		self.assert_(w.getvalue() == "")
+		print w.getvalue()
+		self.assert_(w.getvalue() == "1\n2")
 
 	def test_solve_2 (self) :
-		r = StringIO.StringIO("<a></a>\n<a></a>\n")
+		r = StringIO.StringIO("<a></a>\n<a></a>")
 		w = StringIO.StringIO()
 		xml_solve(r, w)
-		self.assert_(w.getvalue() == "")
+		self.assert_(w.getvalue() == "1\n1")
 
 	def test_solve_3 (self) :
-		r = StringIO.StringIO("<d><a><b></b><c></c></a></d>\n<a><b></b><c></c></a>")
+		r = StringIO.StringIO("<d><a><b></b><c></c></a></d>\n<e></e>")
 		w = StringIO.StringIO()
 		xml_solve(r, w)
-		self.assert_(w.getvalue() == "")
+		self.assert_(w.getvalue() == "0\n")
 
 
-
-'''
-	# -----
-	# print
-	# -----
-
-	def test_print_1 (self) :
-		w = StringIO.StringIO()
-		collatz_print(w, 1, 10, 20)
-		self.assert_(w.getvalue() == "1 10 20\n")
-
-	def test_print_2 (self) :
-		w = StringIO.StringIO()
-		collatz_print(w, 100, 200, 125)
-		self.assert_(w.getvalue() == "100 200 125\n")
-
-	def test_print_3 (self) :
-		w = StringIO.StringIO()
-		collatz_print(w, 900, 1000, 174)
-		self.assert_(w.getvalue() == "900 1000 174\n")
-
-
-'''
 
 # ----
 # main

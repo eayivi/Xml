@@ -56,8 +56,6 @@ def validatePattern(s, t) :#parent is root of tree
 	return False is pattern doesn't match
 	if execution completes, pattern match is validated
 	'''
-	print 'validatePattern'
-
 	matches = 0
 
 	# check for children of search pattern element in children of search tree element
@@ -89,13 +87,13 @@ def xml_solve(r, w):
 		child.set('position', str(i))	# add 'position' attribute to tree elements
 		i=i+1
 
-	indexedTree = indexTree(root[0])	# search tree as list
+	#indexedTree = indexTree(root[0])	# search tree as list
 
 	treeSize = 0					# number of element in search tree
 	for i in root[0].iter():
 		treeSize += 1
 	
-	searchPattern = indexTree(root[1])	# search pattern as list
+	#searchPattern = indexTree(root[1])	# search pattern as list
 
 	treeroot = root[0].tag   # THU
 
@@ -107,7 +105,7 @@ def xml_solve(r, w):
 		if c.tag == root[1].tag:
 			potentialMatches.append(c.get('position'))
 
-	print 'POTENTIAL MATCHES: ' + str(potentialMatches)
+	#print 'POTENTIAL MATCHES: ' + str(potentialMatches)
 
 	# validate potential matches
 
@@ -117,7 +115,6 @@ def xml_solve(r, w):
 		b = True
 		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
 			b = validatePattern(root[1], e)
-			print b
 			if b != False:
 				matchIndex += 1
 			else:
@@ -125,10 +122,12 @@ def xml_solve(r, w):
 
 
 
-	print 'VALIDATED MATCHES: ' + str(potentialMatches)
+	#print 'VALIDATED MATCHES: ' + str(potentialMatches)
 
 
-
+	w.write(str(len(potentialMatches)) + '\n')
+	for i in potentialMatches:
+		w.write(str(i) + '\n')
 	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)	# 
 
 	#print l
