@@ -15,9 +15,11 @@ def xml_read(r, w):
 	xml = line
 	assert type(line) == str
 	assert type(line) == type(xml)
-	while line != '\n' and line != '':
+	while line != '' and line != '\n':
 		line = r.readline()
 		xml += line
+	if len(xml) == 0:
+		raise EOF
 
 	xml = "<XML>" + xml + "</XML>" 
 	assert len(xml) > 10
@@ -83,49 +85,55 @@ def validatePattern(s, t) :#parent is root of tree
 
 
 def xml_solve(r, w):
-	root = xml_read(r, w)
-	
-	i=0
-	for child in root.iter():
-		child.set('position', str(i))	# add 'position' attribute to tree elements
-		i=i+1
 
-	treeSize = 0					# number of element in search tree
-	for i in root[0].iter():
-		treeSize += 1
+	while True:
+		try:
+			root = xml_read(r, w)
 
-	treeroot = root[0].tag   # THU
-	assert type(treeroot) == str
+			i=0
+			for child in root.iter():
+				child.set('position', str(i))	# add 'position' attribute to tree elements
+				i=i+1
 
-	# find locations of search pattern root in search tree
-	potentialMatches = []
-	for c in root[0].iter():
-		if c.tag == root[1].tag:
-			potentialMatches.append(c.get('position'))
+			treeSize = 0					# number of element in search tree
+			for i in root[0].iter():
+				treeSize += 1
 
-	#print 'POTENTIAL MATCHES: ' + str(potentialMatches)
+			treeroot = root[0].tag   # THU
+			assert type(treeroot) == str
 
-	# validate potential matches
-	matchIndex = 0
+			# find locations of search pattern root in search tree
+			potentialMatches = []
+			for c in root[0].iter():
+				if c.tag == root[1].tag:
+					potentialMatches.append(c.get('position'))
 
-	for e in root[0].iter():
-		assert type(e) == type(root)
-		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
-			b = validatePattern(root[1], e)
-			assert b == False or b == None
-			if b != False:
-				assert matchIndex < len(potentialMatches)
-				matchIndex += 1
-			else:
-				potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
+			#print 'POTENTIAL MATCHES: ' + str(potentialMatches)
 
-	#print 'VALIDATED MATCHES: ' + str(potentialMatches)
+			# validate potential matches
+			matchIndex = 0
 
-	assert type(potentialMatches) == list
+			for e in root[0].iter():
+				assert type(e) == type(root)
+				if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
+					b = validatePattern(root[1], e)
+					assert b == False or b == None
+					if b != False:
+						assert matchIndex < len(potentialMatches)
+						matchIndex += 1
+					else:
+						potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
 
-	w.write(str(len(potentialMatches)) + '\n')
-	for i in potentialMatches:
-		w.write(str(i) + '\n')
+			#print 'VALIDATED MATCHES: ' + str(potentialMatches)
+
+			assert type(potentialMatches) == list
+
+			w.write(str(len(potentialMatches)) + '\n')
+			for i in potentialMatches:
+				w.write(str(i) + '\n')
+			w.write('\n')
+		except:
+			return 0
 
 	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
 
