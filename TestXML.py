@@ -113,7 +113,6 @@ class TestXML (unittest.TestCase) :
 	def test_solve_1 (self) :
 		r = StringIO.StringIO("<d><a><b></b><c></c></a></d>\n<a><b></b><c></c></a>")
 		w = StringIO.StringIO()
-		print r
 		xml_solve(r, w)
 		print w.getvalue()
 		self.assert_(w.getvalue() == "1\n2\n")

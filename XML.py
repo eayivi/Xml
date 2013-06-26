@@ -92,17 +92,12 @@ def xml_solve(r, w):
 		child.set('position', str(i))	# add 'position' attribute to tree elements
 		i=i+1
 
-	#indexedTree = indexTree(root[0])	# search tree as list
-
 	treeSize = 0					# number of element in search tree
 	for i in root[0].iter():
 		treeSize += 1
-	
-	#searchPattern = indexTree(root[1])	# search pattern as list
 
 	treeroot = root[0].tag   # THU
-
-	
+	assert type(treeroot) == str
 
 	# find locations of search pattern root in search tree
 	potentialMatches = []
@@ -113,25 +108,26 @@ def xml_solve(r, w):
 	#print 'POTENTIAL MATCHES: ' + str(potentialMatches)
 
 	# validate potential matches
-
 	matchIndex = 0
 
 	for e in root[0].iter():
-		b = True
+		assert type(e) == type(root)
 		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
 			b = validatePattern(root[1], e)
+			assert b == False or b == None
 			if b != False:
+				assert matchIndex < len(potentialMatches)
 				matchIndex += 1
 			else:
 				potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
 
 	#print 'VALIDATED MATCHES: ' + str(potentialMatches)
 
+	assert type(potentialMatches) == list
 
 	w.write(str(len(potentialMatches)) + '\n')
 	for i in potentialMatches:
 		w.write(str(i) + '\n')
-	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)	# 
 
-	#print l
-	return 0
+	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
+
