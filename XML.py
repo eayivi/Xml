@@ -132,4 +132,4 @@ def xml_solve(r, w):
 	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)	# 
 
 	#print l
-
+	return 0
