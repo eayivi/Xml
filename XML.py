@@ -15,12 +15,10 @@ def xml_read(r, w):
 	xml = line
 	assert type(line) == str
 	assert type(line) == type(xml)
-	while line != "":
+	while line != '\n' and line != '':
 		line = r.readline()
 		xml += line
 
-	assert line == ""
-	
 	xml = "<XML>" + xml + "</XML>" 
 	assert len(xml) > 10
 	assert type(xml) == str
