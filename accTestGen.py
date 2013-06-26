@@ -2,7 +2,7 @@ import random
 
 fw = open('accTestGen.out', 'w')
 
-for i in range(100):		# number of test cases
+for i in range(50):		# number of test cases
 	numTags = int(random.random() * 100 + 1)
 	numTags2 = int(random.random() * 10 + 1)
 
@@ -18,6 +18,12 @@ for i in range(100):		# number of test cases
 
 	for t in l:
 		fw.write('<' + t + '>\n')
+		if random.random() < .5:
+			c = chr(int(random.random() * 26 + 65))
+			fw.write('<' + c + '></' + c + '>')
+		if random.random() < .5:
+			c = chr(int(random.random() * 26 + 65))
+			fw.write('<' + c + '></' + c + '>')
 	for t in reversed(l):
 		fw.write('</' + t + '>\n')
 
@@ -30,6 +36,12 @@ for i in range(100):		# number of test cases
 
 	for t in l2:
 		fw.write('<' + t + '>\n')
+		if random.random() < .5:
+			c = chr(int(random.random() * 26 + 65))
+			fw.write('<' + c + '></' + c + '>')
+		if random.random() < .5:
+			c = chr(int(random.random() * 26 + 65))
+			fw.write('<' + c + '></' + c + '>')
 	for t in reversed(l2):
 		fw.write('</' + t + '>\n')
 	fw.write('\n')
