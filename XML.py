@@ -51,7 +51,7 @@ def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, tree
 
 def validatePattern(s, t) :#parent is root of tree
 	'''
-	sp is an element in the search pattern
+	s is an element in the search pattern
 	t is an element in the search tree
 	return False is pattern doesn't match
 	if execution completes, pattern match is validated
@@ -113,11 +113,11 @@ def xml_solve(r, w):
 
 	matchIndex = 0
 
-
 	for e in root[0].iter():
 		b = True
 		if matchIndex < len(potentialMatches) and e.get('position') == potentialMatches[matchIndex]:
 			b = validatePattern(root[1], e)
+			print b
 			if b != False:
 				matchIndex += 1
 			else:

@@ -23,7 +23,7 @@ import StringIO
 import unittest
 import xml.etree.ElementTree as ET
 
-from XML import xml_read, indexTree, findPattern, xml_solve
+from XML import xml_read, indexTree, validatePattern, xml_solve
 
 # -----------
 # TestCollatz
@@ -83,54 +83,30 @@ class TestXML (unittest.TestCase) :
 		self.assert_(len(l) == 5)
 		self.assert_(l == ['a', 'b', 'c', 'd', 'e'])
 
-	# -----------
-	# findPattern
-	# -----------
 
-	def test_findPattern_1 (self) :
-		r = StringIO.StringIO("<a></a>\n<a></a>")
-		w = StringIO.StringIO()
-		root = xml_read(r, w)
-		pat = indexTree(root[1])
-		i=0
-		for child in root.iter():
-			child.set('position', str(i))
-			i=i+1
-		treeSize = 0
-		for i in root[0].iter():
-			treeSize += 1
-		l = findPattern(root[0], pat, 0, 0, [], treeSize)
-		self.assert_(l == ['1'])
+	# ---------------
+	# validatePattern
+	# ---------------
 
-	def test_findPattern_2 (self) :
-		r = StringIO.StringIO("<a></a>\n<b></b>")
-		w = StringIO.StringIO()
-		root = xml_read(r, w)
-		pat = indexTree(root[1])
-		i=0
-		for child in root.iter():
-			child.set('position', str(i))
-			i=i+1
-		treeSize = 0
-		for i in root[0].iter():
-			treeSize += 1
-		l = findPattern(root[0], pat, 0, 0, [], treeSize)
-		self.assert_(l == [])
+	def test_validatePattern_1 (self):
+		tree1 = ET.fromstring("<a></a>")
+		tree2 = ET.fromstring("<b><a></a></b>")
+		b = validatePattern(tree1, tree2)
+		self.assert_(b != False)
 
-	def test_findPattern_3 (self) :
-		r = StringIO.StringIO("<a><b><a></a></b></a>\n<a></a>")
-		w = StringIO.StringIO()
-		root = xml_read(r, w)
-		pat = indexTree(root[1])
-		i=0
-		for child in root.iter():
-			child.set('position', str(i))
-			i=i+1
-		treeSize = 0
-		for i in root[0].iter():
-			treeSize += 1
-		l = findPattern(root[0], pat, 0, 0, [], treeSize)
-		self.assert_(l == ['1', '3'])
+	def test_validatePattern_2 (self):
+		tree1 = ET.fromstring("<a><b></b><c></c></a>")
+		tree2 = ET.fromstring("<a><b><c></c></b></a>")
+		b = True
+		b = validatePattern(tree1, tree2)
+		print "b = " + str(b)
+		self.assert_(b == False)
+
+	def test_validatePattern_3 (self):
+		tree1 = ET.fromstring("<d><a><b></b><c></c></a></d>")
+		tree2 = ET.fromstring("<d><a><b></b><c></c></a></d>")
+		b = validatePattern(tree1, tree2)
+		self.assert_(b != False)
 
 	# -----
 	# solve
