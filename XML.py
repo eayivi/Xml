@@ -11,6 +11,13 @@ import sys
 
 
 def xml_read(r, w):
+	'''
+	reads xml tags from file into a string returns them as an element tree
+	r is a reader
+	w is a writer
+	raises exception if no input
+	returns root of element tree
+	'''
 	line = r.readline()
 	xml = line
 	assert type(line) == str
@@ -20,6 +27,7 @@ def xml_read(r, w):
 		xml += line
 	if len(xml) == 0:
 		raise EOF
+		assert False
 
 	xml = "<XML>" + xml + "</XML>" 
 	assert len(xml) > 10
@@ -27,31 +35,16 @@ def xml_read(r, w):
 	return ET.fromstring(xml)
 
 def indexTree (root):
+	'''
+	converts element tree to a list
+	root is the root of an element tree
+	returns list representation of element tree
+	'''
 	indexedTreeHelper = [] 		# ['XML', 'THU', 'Team' ...]
 	for child in root.iter():
 		indexedTreeHelper.append(child.tag)
 	assert type(indexedTreeHelper) == list
 	return indexedTreeHelper
-
-'''
-def findPattern(parent, pattern, patternIndex, treeIndex, patternLocations, treeSize) :#parent is root of tree
-	if parent.tag == pattern[patternIndex] :		#patternIndex is how deep we are in the pattern sought
-		if patternIndex == 0:
-			treeIndex = parent.get('position')
-		patternIndex += 1
-		if patternIndex == len(pattern) :			# found all elements from search pattern
-			patternLocations.append(treeIndex)							# list of locations of pattern
-			patternIndex = 0
-	else :
-		patternIndex = 0
-	if int(parent.get('position')) == treeSize:
-		return patternLocations
-
-	for c in parent :
-		ret = findPattern(c, pattern, patternIndex, treeIndex, patternLocations, treeSize)
-		if type(ret) is list:
-			return patternLocations
-'''
 
 def validatePattern(s, t) :#parent is root of tree
 	'''
@@ -81,11 +74,13 @@ def validatePattern(s, t) :#parent is root of tree
 					return False
 	assert b != False
 	
-
-
-
 def xml_solve(r, w):
-
+	'''
+	calls read for each test case, handles validatePattern calls and return values
+	r is a reader
+	w is a writer
+	catches exception raised by xml_read in the event of an empty test case or EOF
+	'''
 	while True:
 		try:
 			root = xml_read(r, w)
@@ -134,6 +129,4 @@ def xml_solve(r, w):
 			w.write('\n')
 		except:
 			return 0
-
-	#l = findPattern (root[0], searchPattern, 0, 0, [], treeSize)
 

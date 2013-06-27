@@ -10,6 +10,161 @@
 <d><a><b></b><c></c></a></d>
 <a><b></b><c></c></a>
 
+<xylem>
+  <wetlands>
+    <roof-garden>
+      <dynamic>
+        <captain>
+          <courageous/>
+          <ornamental>
+            <zinc>
+              <bone-meal/>
+            </zinc>
+            <consistent/>
+          </ornamental>
+        </captain>
+      </dynamic>
+      <verdant>
+        <encounter>
+          <ornamental>
+            <zinc>
+              <bone-meal/>
+            </zinc>
+            <consistent/>
+          </ornamental>
+        </encounter>
+        <ornamental>
+          <zinc>
+            <bone-meal/>
+          </zinc>
+          <consistent/>
+        </ornamental>
+      </verdant>
+    </roof-garden>
+    <mother-nature/>
+    <feeding>
+      <disorientation>
+        <investigator/>
+      </disorientation>
+    </feeding>
+  </wetlands>
+  <nursery>
+    <risk>
+      <barium>
+        <inhalation/>
+      </barium>
+      <humidity/>
+    </risk>
+  </nursery>
+  <minuscule>
+    <frailty/>
+    <ornamental>
+      <zinc>
+        <bone-meal/>
+      </zinc>
+      <consistent/>
+    </ornamental>
+  </minuscule>
+  <screaming>
+    <deplorable/>
+    <ornamental>
+      <zinc>
+        <bone-meal/>
+      </zinc>
+      <consistent/>
+    </ornamental>
+  </screaming>
+</xylem>
+<ornamental><zinc><bone-meal /></zinc><consistent /></ornamental>
+
+<and>
+	<back>
+		<and>
+			<forth>
+				<and>
+					<back>
+					</back>
+					<forth>
+					</forth>
+				</and>
+			</forth>
+			<back>
+				<and>
+					<forth>
+					</forth>
+					<back>
+					</back>
+				</and>
+			</back>
+		</and>
+	</back>
+	<forth>
+		<and>
+			<back>
+				<and>
+					<back>
+					</back>
+					<forth>
+					</forth>
+				</and>
+			</back>
+			<forth>
+				<and>
+					<back>
+					</back>
+					<forth>
+					</forth>
+				</and>
+			</forth>
+		</and>
+	</forth>
+</and>
+<back><and></and></back>
+
+<and>
+	<back>
+		<and>
+			<forth>
+				<and>
+					<back>
+					</back>
+					<forth>
+					</forth>
+				</and>
+			</forth>
+			<back>
+				<and>
+					<forth>
+					</forth>
+					<back>
+					</back>
+				</and>
+			</back>
+		</and>
+	</back>
+	<forth>
+		<and>
+			<back>
+				<and>
+					<back>
+					</back>
+					<forth>
+					</forth>
+				</and>
+			</back>
+			<forth>
+				<and>
+					<back>
+					</back>
+					<forth>
+					</forth>
+				</and>
+			</forth>
+		</and>
+	</forth>
+</and>
+<forth><and></and></forth>
+
 <L>
 <B></B><X></X><Y>
 <V></V><L></L><P>
@@ -501,20 +656,6 @@
 </H>
 </J>
 <Q>
-<M></M><I></I><L>
-<P></P><I>
-<D></D><T></T><A>
-<E>
-<F>
-<A>
-<L>
-<I></I></L>
-</A>
-</F>
-</E>
-</A>
-</I>
-</L>
 </Q>
 
 <K>
@@ -714,18 +855,6 @@
 </B>
 </H>
 <Q>
-<K>
-<H>
-<I></I><U>
-<T></T><H>
-<V>
-<H></H><O></O><V>
-</V>
-</V>
-</H>
-</U>
-</H>
-</K>
 </Q>
 
 <D>
@@ -4247,10 +4376,6 @@
 </I>
 </T>
 <A>
-<G></G><Q>
-<F></F><Q></Q><M>
-</M>
-</Q>
 </A>
 
 <P>
@@ -4573,14 +4698,7 @@
 </D>
 </Z>
 <M>
-<R></R><D></D><O>
-<T>
-<Z></Z><Y>
-<S></S><H></H><K>
-<X></X></K>
-</Y>
-</T>
-</O>
+<R></R>
 </M>
 
 <R>
@@ -4642,24 +4760,6 @@
 </Y>
 </R>
 <P>
-<K>
-<K>
-<K></K><C></C><R>
-<U></U><F></F><H>
-<V>
-<R></R><S></S><O>
-<X>
-<K></K><O>
-<R>
-<V></V></R>
-</O>
-</X>
-</O>
-</V>
-</H>
-</R>
-</K>
-</K>
 </P>
 
 <L>
@@ -4787,18 +4887,6 @@
 </M>
 </L>
 <V>
-<L></L><W></W><V>
-<J></J><F>
-<Z></Z><T></T><U>
-<U></U><B>
-<X>
-<D>
-<G></G></D>
-</X>
-</B>
-</U>
-</F>
-</V>
 </V>
 
 <E>
