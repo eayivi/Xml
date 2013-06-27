@@ -40,13 +40,13 @@ def indexTree (root):
 	root is the root of an element tree
 	returns list representation of element tree
 	'''
-	indexedTreeHelper = [] 		# ['XML', 'THU', 'Team' ...]
+	indexedTreeHelper = []
 	for child in root.iter():
 		indexedTreeHelper.append(child.tag)
 	assert type(indexedTreeHelper) == list
 	return indexedTreeHelper
 
-def validatePattern(s, t) :#parent is root of tree
+def validatePattern(s, t) :
 	'''
 	s is an element in the search pattern
 	t is an element in the search tree
@@ -55,7 +55,7 @@ def validatePattern(s, t) :#parent is root of tree
 	'''
 	matches = 0
 
-	# check for children of search pattern element in children of search tree element
+
 	for sc in s:			# sc is a child of the search pattern element
 		for tc in t:		# tc is a child of the search tree element
 			assert type(sc) == type(tc)
@@ -85,16 +85,17 @@ def xml_solve(r, w):
 		try:
 			root = xml_read(r, w)
 
+			# add postition attribute to tree
 			i=0
 			for child in root.iter():
-				child.set('position', str(i))	# add 'position' attribute to tree elements
+				child.set('position', str(i))
 				i=i+1
 
-			treeSize = 0					# number of element in search tree
+			treeSize = 0
 			for i in root[0].iter():
 				treeSize += 1
 
-			treeroot = root[0].tag   # THU
+			treeroot = root[0].tag
 			assert type(treeroot) == str
 
 			# find locations of search pattern root in search tree
@@ -102,8 +103,6 @@ def xml_solve(r, w):
 			for c in root[0].iter():
 				if c.tag == root[1].tag:
 					potentialMatches.append(c.get('position'))
-
-			#print 'POTENTIAL MATCHES: ' + str(potentialMatches)
 
 			# validate potential matches
 			matchIndex = 0
@@ -119,14 +118,13 @@ def xml_solve(r, w):
 					else:
 						potentialMatches = potentialMatches[:matchIndex] + potentialMatches[matchIndex+1:]
 
-			#print 'VALIDATED MATCHES: ' + str(potentialMatches)
-
 			assert type(potentialMatches) == list
 
 			w.write(str(len(potentialMatches)) + '\n')
 			for i in potentialMatches:
 				w.write(str(i) + '\n')
 			w.write('\n')
+
 		except:
 			return 0
 
